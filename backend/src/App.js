@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-app.use("/MyPage", myPageRouter);
+app.use("/myposts", myPageRouter);
 
 app.get("/", (req, res) => {
     res.status(418).send("Hi");
