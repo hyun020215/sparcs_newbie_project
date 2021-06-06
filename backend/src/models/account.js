@@ -5,7 +5,10 @@ const schema = new mongoose.Schema({
 	_accountID: String,
 	_accountPassword: String,
 	_accountNickname: String,
-	posts: [Post]
+    posts: {
+        type: [Post],
+        default: []
+    }
 }, { timestamps: true });
 
 const AccountModel = mongoose.model("accounts", schema);
