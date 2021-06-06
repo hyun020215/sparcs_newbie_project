@@ -19,10 +19,11 @@ function checkID(accountID, callback) {
 }
 
 function signIn(accountID, accountPassword, callback) {
+    const accountNickname = "TemporaryNickname";
     const newAccount = new AccountModel({
         accountID,
         accountPassword,
-        "TemporaryNickname"
+        accountNickname
     });
     newAccount.save((error, result) => {
         callback(result);
