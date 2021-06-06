@@ -15,14 +15,6 @@ const Page = () => {
             });
     }, []);
 
-    const onEditClick = (item) => {
-        axios.edit(`/api/myposts/${account.ID}/${item._id}/edit`)
-            .then(() => axios.get(`/api/myposts/${account.ID}`))
-            .then(response => {
-                setItems(response.data)
-            });
-    };
-
     const onDeleteClick = (item) => {
         axios.delete(`/api/myposts/${account.ID}/${item._id}/delete`)
             .then(() => axios.get(`/api/myposts/${account.ID}`))
@@ -38,7 +30,6 @@ const Page = () => {
             date={v.date}
             author={v.author}
             content={v.content}
-            onEditClick={() => onEditClick(v)}
             onDeleteClick={() => onDeleteClick(v)}
         />
     ));

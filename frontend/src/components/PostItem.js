@@ -1,5 +1,5 @@
 import React from "react";
-import { FaEdit, FaTrashAlt } from "react-icons/fa";
+import { FaTrashAlt } from "react-icons/fa";
 import "./PostItem.css";
 
 const PostItem = (props) => {
@@ -9,9 +9,6 @@ const PostItem = (props) => {
             <span>{props.date}</span>
             <span>{props.author}</span>
             <span>{props.content}</span>
-            <div className="post-item-action" onClick={props.onEditClick}>
-                <FaEdit />
-            </div>
             <div className="post-item-action" onClick={props.onDeleteClick}>
                 <FaTrashAlt />
             </div>
