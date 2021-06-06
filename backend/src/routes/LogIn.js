@@ -10,17 +10,17 @@ router.get("/", (req, res) => {
                 res.json(account);
             });
         }
-        else res.send("Login failed!");
+        else res.status(500).send("Login failed! Wrong ID/Password!");
     });
 });
 
 router.post("/", (req, res) => {
     const { accountID, accountPW } = req.body;
     db.checkID(accountID, (result) => {
-        if (result) res.send("ID already exists!");
+        if (result) res.status(500).send("ID already exists!");
         else {
             db.signIn(accountID, accountPW, () => {
-                res.send("Signed in successfully!");
+                res.status(200).send("Signed in successfully!");
             });
         }
     });
@@ -35,10 +35,10 @@ router.delete("/", (req, res) => {
 router.put("/", (req, res) => {
     const { accountID, newAccountID, newAccountPassword, newAccountNickname } = req.body;
     db.checkID(newAccountID, (result) => {
-        if (result) res.send("ID already exists!");
+        if (result) res.status(500).send("ID already exists!");
         else {
             db.editInfo(accountID, newAccountID, newAccountPassword, newAccountNickname, () => {
-                res.send("Profile changed successfully!");
+                res.status(200).send("Profile changed successfully!");
             });
         }
     });
