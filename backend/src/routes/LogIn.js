@@ -3,17 +3,23 @@ const db = require("../db");
 const router = express.Router();
 
 router.get("/", (req, res) => {
-    db.checkAccount(req.params.accountID, req.params.accountPassword, (result) => {
-        res.send(result);
+    const { accountID, accountPW } = req.body;
+    db.checkAccount(accountID, accountPW, (result) => {
+        if (result) {
+            db.findAccount(accountID, (account) => {
+                res.json(account);
+            });
+        }
+        else res.send("Login failed!");
     });
 });
 
 router.post("/", (req, res) => {
-    const { accountID, accountPassword, accountNickname } = req.body;
+    const { accountID, accountPW } = req.body;
     db.checkID(accountID, (result) => {
         if (result) res.send("ID already exists!");
         else {
-            db.signIn(accountID, accountPassword, accountNickname, () => {
+            db.signIn(accountID, accountPW, () => {
                 res.send("Signed in successfully!");
             });
         }

@@ -6,17 +6,23 @@ function checkAccount(accountID, accountPassword, callback) {
     });
 }
 
+function findAccount(accountID, callback) {
+    AccountModel.findOne({ _accountID: accountID }, (error, result) => {
+        callback(result);
+    });
+}
+
 function checkID(accountID, callback) {
     AccountModel.exists({ _accountID: accountID }, (error, result) => {
         callback(result);
     });
 }
 
-function signIn(accountID, accountPassword, accountNickname, callback) {
+function signIn(accountID, accountPassword, callback) {
     const newAccount = new AccountModel({
         accountID,
         accountPassword,
-        accountNickname
+        "TemporaryNickname"
     });
     newAccount.save((error, result) => {
         callback(result);
@@ -75,6 +81,7 @@ function editPost(id, callback) {
 
 module.exports = {
     checkAccount,
+    findAccount,
     checkID,
     signIn,
     withdraw,
