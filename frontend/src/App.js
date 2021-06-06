@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { Link, BrowserRouter, Route, Switch } from "react-router-dom";
 import "./App.css";
 
 import MyPage from "./components/MyPage";
