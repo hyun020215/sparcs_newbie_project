@@ -16,7 +16,7 @@ const Page = () => {
     }, []);
 
     const onDeleteClick = (item) => {
-        axios.delete(`/api/myposts/${item._id}/delete`)
+        axios.delete(`/api/myposts/${account.ID}/${item._id}/delete`)
             .then(() => axios.get(`/api/myposts/${account.ID}`))
             .then(response => {
                 setItems(response.data)
