@@ -13,8 +13,9 @@ function App() {
     const [user, setUser] = useState(null);
     const authenticated = (user != null);
 
-    const login = ({ ID, password, nickname }) => axios.get(`/api/login`).then(response => { setUser(response.data) });
+    const login = ({ ID, password }) => axios.get(`/api/login/${ID}/${password}`).then(response => { setUser(response.data) });
     const logout = () => setUser(null);
+    const siginin = ({ ID, password }) => axios.post(`/api/login/${ID}/${password}`).then(response => { setUser(response.data) });
 
     return (
         <BrowserRouter>
@@ -32,7 +33,7 @@ function App() {
                 </Route>
                 <AuthRoute authenticated={authenticated} exact path="/MyPage" render={props => <MyPage user={user} {...props} />} />
                 <Route exact path="/login" render={props => (
-                    <LoginPage authenticated={authenticated} login={login} {...props} />
+                    <LoginPage authenticated={authenticated} login={login} signin={siginin} {...props} />
                 )}/>
             </Switch>
         </BrowserRouter>

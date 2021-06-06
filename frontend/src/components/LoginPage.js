@@ -1,15 +1,25 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 
-const LoginPage = ({ authenticated, login, location }) => {
+const LoginPage = ({ authenticated, login, signin, location }) => {
     const [ID, setID] = useState("");
     const [password, setPassword] = useState("");
 
-    const handleClick = () => {
+    const loginClick = () => {
         try {
             login({ ID, password });
         } catch (e) {
-            alert("Failed to login");
+            alert("Failed to login. Check ID and Password again.");
+            setID("");
+            setPassword("");
+        }
+    };
+
+    const signinClick = () => {
+        try {
+            signin({ ID, password });
+        } catch (e) {
+            alert("Failed to signin. The ID already exists.");
             setID("");
             setPassword("");
         }
@@ -27,13 +37,16 @@ const LoginPage = ({ authenticated, login, location }) => {
                 type="text"
                 placeholder="ID"
             />
+            <br/>
             <input
                 value={password}
                 onChange={({ target: { value } }) => setPassword(value)}
                 type="password"
                 placeholder="password"
             />
-            <button onClick={handleClick}>Login</button>
+            <br/>
+            <button onClick={loginClick}>Login</button>
+            <button onClick={signinClick}>Sign in</button>
         </div>
     );
 }
