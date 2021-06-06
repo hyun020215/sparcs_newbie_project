@@ -2,9 +2,9 @@ const mongoose = require("mongoose");
 const Post = require("./post");
 
 const schema = new mongoose.Schema({
-	_accountID: String,
-	_accountPassword: String,
-	_accountNickname: String,
+	accountID: String,
+	accountPassword: String,
+	accountNickname: String,
     posts: {
         type: [Post],
         default: []
