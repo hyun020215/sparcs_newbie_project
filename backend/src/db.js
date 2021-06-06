@@ -49,7 +49,8 @@ function editInfo(accountID, newAccountID, newAccountPassword, newAccountNicknam
 
 function getPosts(accountID, callback) {
     AccountModel.findOne({ _accountID: accountID }, (error, element) => {
-        callback(element.posts);
+        if (element.posts == null) callback([]);
+        else callback(element.posts);
     });
 }
 
