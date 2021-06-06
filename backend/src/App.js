@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
 const myPageRouter = require("./routes/MyPage");
+const logInRouter = require("./routes/LogIn");
 const mongoose = require("mongoose");
 
 const app = express();
@@ -23,6 +24,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use("/myposts", myPageRouter);
+app.use("/login", logInRouter);
 
 app.get("/", (req, res) => {
     res.status(418).send("Hi");
