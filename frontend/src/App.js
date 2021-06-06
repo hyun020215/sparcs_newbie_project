@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { Link, BrowserRouter, Route, Switch } from "react-router-dom";
 import "./App.css";
@@ -30,7 +30,7 @@ function App() {
                 <Route exact path="/">
                     <h1>Main</h1>
                 </Route>
-                <AuthRoute authenticated={authenticated} exact path="/MyPage" render={props => <MyPage {...props} />} />
+                <AuthRoute authenticated={authenticated} exact path="/MyPage" render={props => <MyPage user={user} {...props} />} />
                 <Route exact path="/login" render={props => (
                     <LoginPage authenticated={authenticated} login={login} {...props} />
                 )}/>
