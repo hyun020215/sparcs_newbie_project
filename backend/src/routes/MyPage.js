@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get("/:accountID", (req, res) => {
     db.getPosts(req.params.accountID, (items) => {
-        if (items == null) res.json([]);
+        if (items == null) res.status(200).json([]);
         else res.json(items);
     });
 });
