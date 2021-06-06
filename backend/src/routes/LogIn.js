@@ -20,7 +20,9 @@ router.post("/", (req, res) => {
         if (result) res.status(500).send("ID already exists!");
         else {
             db.signIn(accountID, accountPW, () => {
-                res.status(200).send("Signed in successfully!");
+                db.findAccount(accountID, (account) => {
+                    res.json(account);
+                });
             });
         }
     });
