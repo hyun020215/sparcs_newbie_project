@@ -37,7 +37,7 @@ function withdraw(accountID, callback) {
 }
 
 function editInfo(accountID, newAccountID, newAccountPassword, newAccountNickname, callback) {
-    AccountModel.find({ _accountID: accountID }, function (error, element) {
+    AccountModel.findOne({ _accountID: accountID }, function (error, element) {
         element._accountID = newAccountID;
         element._accountPassword = newAccountPassword;
         element._accountNickname = newAccountNickname;
@@ -48,13 +48,13 @@ function editInfo(accountID, newAccountID, newAccountPassword, newAccountNicknam
 }
 
 function getPosts(accountID, callback) {
-    AccountModel.find({ _accountID: accountID }, (error, element) => {
+    AccountModel.findOne({ _accountID: accountID }, (error, element) => {
         callback(element.posts);
     });
 }
 
 function addPost(accountID, title, date, author, content, callback) {
-    AccountModel.findById(accountID, function (error, element) {
+    AccountModel.findOne({ _accountID: accountID }, function(error, element) {
         element.posts.add(newPost);
         element.save(function (err, result) {
             callback(result);
@@ -63,7 +63,7 @@ function addPost(accountID, title, date, author, content, callback) {
 }
 
 function removePost(accountID, postID, callback) {
-    AccountModel.findById(accountID, function (err, element) {
+    AccountModel.findOne({ _accountID: accountID }, function(err, element) {
         element.posts.remove(postID);
         element.save(function (err, result) {
             callback(result);
@@ -71,8 +71,8 @@ function removePost(accountID, postID, callback) {
     });
 }
 
-function editPost(id, callback) {
-    AccountModel.findById(accountID, function (err, element) {
+function editPost(accountID, callback) {
+    AccountModel.findOne({ _accountID: accountID }, function(err, element) {
         element.posts.find(postID);
         element.save(function (err, result) {
             callback(result);
