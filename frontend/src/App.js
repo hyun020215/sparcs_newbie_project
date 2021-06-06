@@ -13,9 +13,15 @@ function App() {
     const [user, setUser] = useState(null);
     const authenticated = (user != null);
 
-    const login = ({ ID, password }) => axios.get(`/api/login/${ID}/${password}`).then(response => { setUser(response.data) });
+    const login = ({ ID, password }) => axios.get(`/api/login`, {
+        accountID: ID,
+        accountPW: password
+    }).then(response => { setUser(response.data) });
     const logout = () => setUser(null);
-    const siginin = ({ ID, password }) => axios.post(`/api/login/${ID}/${password}`).then(response => { setUser(response.data) });
+    const siginin = ({ ID, password }) => axios.post(`/api/login`, {
+        accountID: ID,
+        accountPW: password
+    }).then(response => { setUser(response.data) });
 
     return (
         <BrowserRouter>
