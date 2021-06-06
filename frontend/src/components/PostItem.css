@@ -1,0 +1,22 @@
+.post-item {
+    height: 54px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+}
+
+    .post-item > span {
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+    }
+
+.post-item-action {
+    width: 36px;
+    height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    cursor: pointer;
+}
