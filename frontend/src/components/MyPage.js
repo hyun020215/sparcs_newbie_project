@@ -5,7 +5,7 @@ import "./MyPage.css";
 
 const Page = ({ user }) => {
     const { ID, pw, nickname, posts } = user || {};
-    const [items, setItems] = useState([]);
+    const [items, setItems] = useState(posts);
 
     useEffect(() => {
         // 목록 조회 요청 전송
@@ -37,6 +37,9 @@ const Page = ({ user }) => {
 
     return (
         <div className="MyPage">
+            <div className="Profile">
+                <h3>{nickname}</h3>
+            </div>
             {postItemEls}
         </div>
     );
