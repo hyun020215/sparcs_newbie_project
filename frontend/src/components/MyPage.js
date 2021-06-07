@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import PostItem from "./PostItem"
+import WithdrawButton from "./WithdrawButton";
 import "./MyPage.css";
 
-const Page = ({ user }) => {
-    const { ID, pw, nickname, posts } = user || {};
+const Page = ({ user, withdraw }) => {
+    const { accountID, accountPassword, accountNickname, posts } = user || {};
     const [items, setItems] = useState(posts);
 
     useEffect(() => {
         // 목록 조회 요청 전송
-        axios.get(`/api/myposts/${ID}`)
+        axios.get(`/api/myposts/${accountID}`)
             // 응답이 돌아오면 응답 내용으로 목록을 변경
             .then(response => {
                 setItems(response.data);
@@ -17,8 +18,8 @@ const Page = ({ user }) => {
     }, []);
 
     const onDeleteClick = (item) => {
-        axios.delete(`/api/myposts/${ID}/${item._id}/delete`)
-            .then(() => axios.get(`/api/myposts/${ID}`))
+        axios.delete(`/api/myposts/${accountID}/${item._id}/delete`)
+            .then(() => axios.get(`/api/myposts/${accountID}`))
             .then(response => {
                 setItems(response.data)
             });
@@ -38,7 +39,8 @@ const Page = ({ user }) => {
     return (
         <div className="MyPage">
             <div className="Profile">
-                <h3>{nickname}</h3>
+                <h3>{accountNickname}</h3>
+                <WithdrawButton withdraw={withdraw} accountID={accountID} />
             </div>
             {postItemEls}
         </div>

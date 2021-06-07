@@ -6,23 +6,11 @@ const LoginPage = ({ authenticated, login, signin, location }) => {
     const [password, setPassword] = useState("");
 
     const loginClick = () => {
-        try {
-            login({ ID, password });
-        } catch (e) {
-            alert("Failed to login. Check ID and Password again.");
-            setID("");
-            setPassword("");
-        }
+        login({ ID, password });
     };
 
     const signinClick = () => {
-        try {
-            signin({ ID, password });
-        } catch (e) {
-            alert("Failed to signin. The ID already exists.");
-            setID("");
-            setPassword("");
-        }
+        signin({ ID, password });
     };
 
     const { from } = location.state || { from: { pathname: "/" } };
@@ -31,13 +19,15 @@ const LoginPage = ({ authenticated, login, signin, location }) => {
     return (
         <div className="LoginPage">
             <h1>Login</h1>
+            <h3>ID: </h3>
             <input
                 value={ID}
                 onChange={({ target: { value } }) => setID(value)}
                 type="text"
                 placeholder="ID"
             />
-            <br/>
+            <br />
+            <h3>password: </h3>
             <input
                 value={password}
                 onChange={({ target: { value } }) => setPassword(value)}
@@ -45,7 +35,7 @@ const LoginPage = ({ authenticated, login, signin, location }) => {
                 placeholder="password"
             />
             <br/>
-            <button onClick={loginClick}>Login</button>
+            <button onClick={loginClick}>Log in</button>
             <button onClick={signinClick}>Sign in</button>
         </div>
     );

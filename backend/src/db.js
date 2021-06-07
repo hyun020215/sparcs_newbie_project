@@ -31,26 +31,25 @@ function signIn(accountID, accountPassword, callback) {
 }
 
 function withdraw(accountID, callback) {
-    AccountModel.deleteOne({ accountID: accountID }, (error, result) => {
+    AccountModel.remove({ accountID: accountID }, (error, result) => {
         callback(result);
     });
 }
 
 function editInfo(accountID, newAccountID, newAccountPassword, newAccountNickname, callback) {
-    AccountModel.findOne({ accountID: accountID }, function (error, element) {
-        element.accountID = newAccountID;
-        element.accountPassword = newAccountPassword;
-        element.accountNickname = newAccountNickname;
-        element.save(function (err, result) {
+    AccountModel.findOneAndUpdate({ accountID: accountID },
+        { $set: { accountID: newAccountID, accountPassword: newAccountPassword, accountNickname: newAccountNickname } },
+        { returnNewDocument: true }, (error, result) => {
             callback(result);
         });
-    });
 }
 
 function getPosts(accountID, callback) {
     AccountModel.findOne({ accountID: accountID }, (error, element) => {
-        if (element.posts == null) callback([]);
-        else callback(element.posts);
+        if (element != null) {
+            if (element.posts == null) callback([]);
+            else callback(element.posts);
+        }
     });
 }
 
