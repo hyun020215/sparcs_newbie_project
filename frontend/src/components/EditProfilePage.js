@@ -2,10 +2,6 @@ import React, { useState } from "react";
 
 const EditProfilePage = ({ editProfile, user }) => {
     const { accountID, accountPassword, accountNickname, posts } = user || {};
-    console.log(accountID);
-    console.log(accountPassword);
-    console.log(accountNickname);
-    console.log(posts);
 
     const [ID, setID] = useState(accountID);
     const [password, setPassword] = useState(accountPassword);

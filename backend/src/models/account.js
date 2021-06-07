@@ -7,12 +7,7 @@ const schema = new mongoose.Schema({
 	accountNickname: String,
     posts: {
         type: [Post],
-        default: [{
-            title: "",
-            date: "",
-            author: "",
-            content: "hello"
-        }]
+        default: []
     }
 }, { timestamps: true });
 

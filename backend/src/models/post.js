@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const schema = new mongoose.Schema({
     title: String,
-    date: Date,
+    date: String,
     author: String,
     content: String
 }, { timestamps: true });

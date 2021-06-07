@@ -3,10 +3,14 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const myPageRouter = require("./routes/MyPage");
 const logInRouter = require("./routes/LogIn");
+const naverRouter = require("./routes/naver");
 const mongoose = require("mongoose");
+const cors = require("cors");
 
 const app = express();
 const port = 8080;
+
+app.use(cors());
 
 mongoose.connect("mongodb://localhost:27017/accounts", {
     useNewUrlParser: true,
@@ -25,6 +29,7 @@ app.use(bodyParser.urlencoded({
 
 app.use("/myposts", myPageRouter);
 app.use("/login", logInRouter);
+app.use("/naver", naverRouter);
 
 app.get("/", (req, res) => {
     res.status(418).send("Hi");
