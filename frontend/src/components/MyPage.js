@@ -18,14 +18,14 @@ const Page = ({ user, withdraw }) => {
     }, []);
 
     const onDeleteClick = (item) => {
-        axios.delete(`/api/myposts/${accountID}/${item._id}/delete`)
-            .then(() => axios.get(`/api/myposts/${accountID}`))
+        console.log(accountID);
+        axios.delete(`/api/myposts/${accountID}/${item._id}`)
             .then(response => {
                 setItems(response.data)
             });
     };
 
-    const postItemEls = items.map(v => (
+    const postItemEls = (items == null) ? null : items.map(v => (
         <PostItem
             key={v._id}
             title={v.title}

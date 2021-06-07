@@ -54,20 +54,20 @@ function getPosts(accountID, callback) {
 }
 
 function addPost(accountID, title, date, author, content, callback) {
-    AccountModel.findOne({ accountID: accountID }, function(error, element) {
-        element.posts.add(newPost);
-        element.save(function (err, result) {
-            callback(result);
-        });
+    const newPost = {
+        title,
+        date,
+        author,
+        content
+    };
+    AccountModel.updateOne({ accountID: accountID }, { $push: { posts: newPost } }, function (error, result) {
+        callback(result);
     });
 }
 
 function removePost(accountID, postID, callback) {
-    AccountModel.findOne({ accountID: accountID }, function(err, element) {
-        element.posts.remove(postID);
-        element.save(function (err, result) {
-            callback(result);
-        });
+    AccountModel.updateOne({ accountID: accountID }, { $pull: { posts: { _id: postID } } }, function (error, result) {
+        callback(result);
     });
 }
 

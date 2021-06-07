@@ -18,7 +18,11 @@ router.post("/:accountID", (req, res) => {
 
 router.delete("/:accountID/:id", (req, res) => {
     db.removePost(req.params.accountID, req.params.id, () => {
-        res.status(200).send();
+        console.log(req.params.id);
+        db.getPosts(req.params.accountID, (items) => {
+            if (items == null) res.status(200).json([]);
+            else res.json(items);
+        });
     });
 });
 
